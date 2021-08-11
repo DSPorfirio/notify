@@ -1,0 +1,32 @@
+version: "3.3"
+services:
+    app:
+        container_name: bcnotify
+        build: 
+            context: ./
+            dockerfile: ./Dockerfiles/app/Dockerfile
+        volumes: 
+            - ./Backend:/var/www/html
+        ports: 
+            - "3000:3000"
+        tty: true
+    
+    db:
+        container_name: dbnotify
+        build: 
+            context: ./
+            dockerfile: ./Dockerfiles/database/Dockerfile
+        volumes:
+            - ./Dockerfiles/database/data:/home/pgdata/data
+        ports: 
+            - "5432:5432"
+        tty: true
+
+    pgadmin:
+        container_name: pgadmin
+        build: 
+            context: ./
+            dockerfile: ./Dockerfiles/pgadmin/Dockerfile
+        ports: 
+            - "8080:80"
+        tty: true
